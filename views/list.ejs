@@ -1,0 +1,42 @@
+<%- include("header") -%>
+<body class="bg-transparent">
+  
+ 
+
+  <nav class="navbar bg-body-tertiary">
+    <div class="container-fluid" id="test">
+      <a class="navbar-brand">Create/Search your list</a>
+      <form class="d-flex" action="/search"	method="post">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
+        <button class="btn btn-outline-success" type="submit">Go</button>
+      </form>
+    </div>
+  </nav>
+
+  <div class="box" id="heading">
+    <h1> <%= listTitle %> </h1>
+  </div>
+
+  <div class="box">
+    <% newListItems.forEach(function(itemz){ %>
+    
+      <form action="/delete" method="post">
+
+      <div class="item">
+        <input type="checkbox" name="checkbox" value="<%=itemz._id%>" onChange="this.form.submit()">
+        <p><%=itemz.name  %></p>
+      </div>
+      <input type="hidden" name="listName" value="<%=listTitle%>"></input>
+    </form>
+
+     <% }) %>
+     
+
+      <form class="item" action="/" method="post">
+        <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
+        <button type="submit" name="list" value="<%= listTitle%>">+</button>
+      </form>
+      
+  </div>
+
+<%- include("footer") -%>
